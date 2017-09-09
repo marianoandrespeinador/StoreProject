@@ -17,4 +17,11 @@ export class ShoppingListService {
         this.ingredients.push(ingredient);
         this.ingredientsChanged.emit(this.ingredients.slice());
     }
+
+    insertIngredients(ingredients: Ingredient[]) {
+        //el siguiente (...) es un ES6 Spread operator, que pasa el array como una serie de parametros, en lugar de un solo parametro
+        this.ingredients.push(...ingredients);
+        this.ingredientsChanged.emit(this.ingredients.slice());
+    }
+
 }

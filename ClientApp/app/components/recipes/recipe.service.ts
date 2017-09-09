@@ -1,9 +1,15 @@
 ﻿import { Recipe } from './recipe.model';
 import { Ingredient } from '../shopping-list/ingredient.model';
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
+import { ShoppingListService } from '../shopping-list/shopping-list.service';
 
+@Injectable()
 export class RecipeService {
     recipeSelected = new EventEmitter<Recipe>();
+
+    constructor(private shoppingListService: ShoppingListService) {
+
+    }
 
     private recipes: Recipe[] = [
         new Recipe('Cookie'
@@ -26,6 +32,10 @@ export class RecipeService {
     getRecipes() {
         //Arrays and objects are reference types in JavaScript (==  TypesScript)
         return this.recipes;
+    }
+
+    addIngredientsToShoppingList(ingredients: Ingredient[]) {
+        this.shoppingListService.insertIngredients(ingredients);
     }
 
 }
